@@ -1,0 +1,48 @@
+Mengacu Pada skematik rangkaian, write reset pada al422 adalah active low karena terhubung pada vsync ov6620 yang merupakan active high maka perlu sedikit pengaturan polaritas sinkronisasi output frame pada register control ov6620 tepatnya pada register CLKRC pada bit ke [7:5] menjadi bernilai [0:1]  
+
+set ov6620:
+
+1. soft reset
+2. mengatur polaritas vsync menjadi active low
+3. mengatur register control COMB[5], memilih 8-bit format, Y/CrCb dan RGB termultipleks ke jalur Y
+5. COMA[4] - Digital output format, “1” selects 8-bit: Y U Y V Y U Y V
+6. COMA[3] - Select video data output: “1” - select RGB,
+7. COMH[7] - “1” selects One-Line RGB raw data output format
+
+
+catatatn:
+For 8-bit RGB Raw Data video output appears on the Y
+channel (with an output sequence of B G R G) and the
+UV channel is disabled. 
+
+menggunakan 4 algoritma
+
+saran:
+1. menggunakan osciloscope untuk menganalisis sinyal digital ov6620
+2. menggunakan library avr sendiri sehingga penggunaan memory flash avr menjadi lebih optimal
+3. pcb
+
+pustaka:
+
+http://www.cs.uml.edu/~fredm/courses/91.548-spr03/student/tkneelan/CMUCam/CMUCam.html
+http://www.cmucam.org/
+
+
+
+
+kamera:
+setting fokus lensa lewat interface RCA port
+sccb interface
+setting register2
+format gambar, jalur data, lebar data
+kaliberasi fokus lensa 
+
+fifo:
+konfigurasi 5v
+simulasikan rck
+
+
+mcu:
+IO
+serial: baudrate, error,dsb
+i2c, scl clock
